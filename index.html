@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wankelův motor – Historie a současnost</title>
+    <style>
+        /* Základní styl stránky */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #e6e6e6;
+            color: #222222;
+            margin: 0;
+            padding: 15px;
+            line-height: 1.5;
+        }
+
+        /* Horní navigace */
+        .menu {
+            background-color: #333333;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto 20px auto;
+            border: 2px solid #111111;
+            box-sizing: border-box;
+        }
+
+        .menu a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 5px;
+            font-size: 13px;
+            display: inline-block;
+            padding: 2px 3px;
+        }
+
+        .menu a:hover {
+            text-decoration: underline;
+            color: #ff6666;
+        }
+
+        .ovladani {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #666666;
+        }
+
+        button {
+            padding: 6px 12px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #cc0000;
+            color: white;
+            border: 1px solid #880000;
+            margin: 2px;
+        }
+
+        button:hover {
+            background-color: #990000;
+        }
+
+        #pocitadlo {
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Styl jednotlivých snímků (boxů) */
+        .slide {
+            background-color: #ffffff;
+            border: 2px solid #444444;
+            max-width: 850px;
+            margin: 0 auto 25px auto;
+            padding: 25px;
+            box-sizing: border-box;
+        }
+
+        /* Nadpisy */
+        h1 {
+            color: #cc0000;
+            text-align: center;
+            font-size: 30px;
+            margin-top: 5px;
+        }
+
+        h2 {
+            color: #cc0000;
+            border-bottom: 2px solid #cc0000;
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .podnadpis {
+            text-align: center;
+            font-size: 18px;
+            color: #555555;
+            font-weight: bold;
+        }
+
+        .cislo-slidu {
+            float: right;
+            color: #888888;
+            font-size: 13px;
+        }
+
+        /* Informační kartičky místo externích fotek */
+        .karty-kontejner {
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .karta-vozu {
+            display: inline-block;
+            width: 46%;
+            margin: 1%;
+            vertical-align: top;
+            background-color: #f5f5f5;
+            border: 1px solid #bbbbbb;
+            border-top: 4px solid #cc0000;
+            padding: 12px;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .karta-vozu strong {
+            color: #cc0000;
+            font-size: 16px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Tabulka */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #333333;
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #cc0000;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Výhody a nevýhody */
+        .vyhody {
+            background-color: #eef9ee;
+            border: 1px solid #4CAF50;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .nevyhody {
+            background-color: #ffeeee;
+            border: 1px solid #cc0000;
+            padding: 15px;
+        }
+
+        /* Jednoduchý graf pomocí divů */
+        .graf-radek {
+            margin-bottom: 16px;
+        }
+
+        .graf-popis {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .graf-cislo {
+            font-weight: bold;
+            color: #cc0000;
+        }
+
+        .graf-pozadi {
+            background-color: #dddddd;
+            width: 100%;
+            height: 24px;
+            border: 1px solid #999999;
+        }
+
+        .graf-pruh {
+            background-color: #cc0000;
+            height: 24px;
+            color: white;
+            font-size: 12px;
+            line-height: 24px;
+            padding-left: 8px;
+            box-sizing: border-box;
+        }
+
+        /* Zvýrazněný infobox */
+        .infobox {
+            background-color: #fff8e6;
+            border-left: 5px solid #cc0000;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .zdroje-box {
+            background-color: #f5f5f5;
+            border: 1px solid #cccccc;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .zdroje-box a {
+            color: #cc0000;
+            word-break: break-all;
+        }
+
+        /* Úprava pro menší obrazovky */
+        @media (max-width: 650px) {
+            .karta-vozu {
+                width: 98%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HORNÍ NAVIGAČNÍ MENU -->
+    <div class="menu">
+        <div>
+            <a href="#slide1" onclick="ukazKonkretni(0)">Úvod</a> |
+            <a href="#slide2" onclick="ukazKonkretni(1)">1. Historie</a> |
+            <a href="#slide3" onclick="ukazKonkretni(2)">2. Konstrukce</a> |
+            <a href="#slide4" onclick="ukazKonkretni(3)">3. Identifikace</a> |
+            <a href="#slide5" onclick="ukazKonkretni(4)">4. Vlastnosti</a> |
+            <a href="#slide6" onclick="ukazKonkretni(5)">5. Mazda RX-8</a> |
+            <a href="#slide7" onclick="ukazKonkretni(6)">6. Produkce</a> |
+            <a href="#slide8" onclick="ukazKonkretni(7)">7. Statistika</a> |
+            <a href="#slide9" onclick="ukazKonkretni(8)">8. Le Mans 1991</a> |
+            <a href="#slide10" onclick="ukazKonkretni(9)">9. Elektromobilita</a> |
+            <a href="#slide11" onclick="ukazKonkretni(10)">10. Budoucnost</a> |
+            <a href="#slide12" onclick="ukazKonkretni(11)">Závěr a zdroje</a>
+        </div>
+        <div class="ovladani">
+            <button id="tlacitkoRezim" onclick="zmenRezim()">Režim: Po jednom snímku</button>
+            <span id="sipky" style="display: none;">
+                <button onclick="posunSlide(-1)">&#9664; Předchozí</button>
+                <span id="pocitadlo">1 / 12</span>
+                <button onclick="posunSlide(1)">Další &#9654;</button>
+            </span>
+        </div>
+    </div>
+
+    <!-- SLIDE 1: ÚVOD -->
+    <div class="slide" id="slide1">
+        <span class="cislo-slidu">Snímek 1 / 12</span>
+        <p class="podnadpis">SPALOVACÍ MOTORY S ROTAČNÍM PÍSTEM</p>
+        <h1>Wankelův motor (KKM)</h1>
+        <p class="podnadpis">Historie, konstrukce a současné využití v praxi</p>
+        <p style="text-align: center; color: #555555;"><strong>Autor: Filip Krejča</strong></p>
+        <hr>
+        <p>
+            Tato webová prezentace slouží jako kompletní studijní materiál o spalovacích motorech s rotačním (krouživým) pístem, známých jako <strong>Wankelův motor</strong>. Protože k této verzi není připojen mluvený výklad, jsou jednotlivé kapitoly doplněny o podrobné vysvětlující texty.
+        </p>
+        <p>
+            Zatímco běžný spalovací motor využívá písty, které se ve válcích pohybují neustále nahoru a dolů (vratný pohyb), Wankelův motor nahrazuje tento mechanismus <strong>plynulým krouživým pohybem trojúhelníkového pístu</strong>. Díky tomu je motor mimořádně malý, lehký a má velmi hladký chod bez vibrací.
+        </p>
+
+        <h3>Čtyři nejvýznamnější milníky v historii vozů s Wankelem:</h3>
+        <div class="karty-kontejner">
+            <div class="karta-vozu">
+                <strong>NSU Spider (1964)</strong>
+                První sériově vyráběný osobní automobil na světě s Wankelovým motorem. Měl vzadu uložený jednorotorový agregát o objemu 498 cm³ a výkonu 50 koní.
+            </div>
+            <div class="karta-vozu">
+                <strong>NSU Ro 80 (1967)</strong>
+                Revoluční a aerodynamický německý sedan s dvourotorovým motorem (995 cm³). Získal titul Evropský automobil roku 1968.
+            </div>
+            <div class="karta-vozu">
+                <strong>Mazda Cosmo Sport 110S (1967)</strong>
+                První japonský sportovní vůz s dvourotorovým Wankelem, kterým automobilka Mazda odstartovala svou dlouhou éru rotačních motorů.
+            </div>
+            <div class="karta-vozu">
+                <strong>Mazda RX-7 (1978–2002)</strong>
+                Kultovní sportovní kupé vyráběné ve třech generacích. S více než 811 tisíci kusy jde o nejprodávanější auto s rotačním motorem v historii.
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: HISTORICKÝ PŘEHLED -->
+    <div class="slide" id="slide2">
+        <span class="cislo-slidu">Snímek 2 / 12</span>
+        <h2>1. Historický přehled: Vývojová řada Wankelova motoru</h2>
+        <p>
+            Příběh tohoto nekonvenčního motoru se začal psát v 50. letech 20. století, kdy německý samouk a konstruktér <strong>Felix Wankel</strong> ve spolupráci s výrobcem motocyklů a aut <strong>NSU</strong> hledal způsob, jak odstranit vratný pohyb pístů a nahradit jej čistou rotací.
+        </p>
+
+        <ul>
+            <li><strong>1957 – První funkční prototyp DKM 54 a koncepce KKM 57:</strong> V únoru 1957 se poprvé rozběhl experimentální motor DKM 54 na zkušební stolici. Ještě v témže roce byla dokončena praktičtější verze KKM 57 s pevnou skříní, o kterou okamžitě projevily zájem desítky světových automobilek.</li>
+            <li><strong>1964 – První sériový automobil NSU Spider:</strong> Malý otevřený kabriolet se stal prvním komerčně prodávaným vozem na světě s rotačním motorem. Ukázal světu vysokou kultivovanost chodu a ochotu vytáčet se do vysokých otáček.</li>
+            <li><strong>1967 – Éra dvourotorových vozů (NSU Ro 80, Mazda Cosmo):</strong> Pro vyšší výkon a dokonalé vyvážení nastoupily dvourotorové motory. Německé NSU Ro 80 přineslo nadčasovou aerodynamiku, ale trpělo rychlým opotřebením vrcholových těsnění u prvních sérií. Japonská Mazda však problém s materiály těsnění úspěšně vyřešila u svého modelu Cosmo Sport (a následně i u luxusního kupé Mazda Luce Rotary Coupé).</li>
+            <li><strong>1978 – Masová produkce sportovních modelů Mazda RX-7:</strong> Zatímco většina výrobců vývoj po ropné krizi v 70. letech vzdala kvůli vyšší spotřebě paliva, Mazda vytrvala. Lehké sportovní kupé RX-7 se stalo celosvětovou legendou.</li>
+            <li><strong>2023 – Návrat v roli generátoru (Mazda MX-30 R-EV):</strong> Po desetileté přestávce od ukončení výroby Mazdy RX-8 (2012) se Wankelův motor vrátil do sériové výroby jako kompaktní palubní elektrárna pro plug-in hybridní elektromobil.</li>
+        </ul>
+    </div>
+
+    <!-- SLIDE 3: KONSTRUKČNÍ SCHÉMA -->
+    <div class="slide" id="slide3">
+        <span class="cislo-slidu">Snímek 3 / 12</span>
+        <h2>2. Konstrukční schéma a hlavní části motoru</h2>
+        <p>
+            Místo klasických válců, ojnic a klikové hřídele využívá Wankelův motor geometricky přesně tvarovanou komoru a trojúhelníkový píst. Při otáčení pístu vznikají mezi jeho stěnami a stěnou komory <strong>tři oddělené pracovní prostory</strong>, které neustále mění svůj objem.
+        </p>
+
+        <h3>Čtyři hlavní konstrukční prvky:</h3>
+        <ul>
+            <li><strong>1. Komora (stator) – Oválný tvar epitrochoidy:</strong> Blok motoru nemá válcovou dutinu, ale vnitřní stěnu vytvarovanou podle matematické křivky zvané <em>epitrochoida</em> (připomíná mírně uprostřed zúžený ovál či piškot). Ve stěnách jsou umístěny sací a výfukové kanály (bez jakýchkoliv ventilů) a v zúžené části zapalovací svíčky.</li>
+            <li><strong>2. Rotační píst (rotor) – Sférický Reuleauxův trojúhelník:</strong> Píst má tvar trojúhelníku s mírně vypouklými stranami. V každé ze tří vypouklých stěn pístu je vybrání (prohlubeň), které určuje kompresní poměr a pomáhá přenosu plynů kolem svíček. Uvnitř pístu je vnitřní ozubené kolo, které vede jeho přesnou dráhu.</li>
+            <li><strong>3. Excentrická hřídel – Převod krouživého pohybu:</strong> Plní stejnou úlohu jako kliková hřídel v běžném motoru. Píst je nasazen na excentrickém čepu této hřídele. Důležitou vlastností je převodový poměr <strong>1:3</strong> – zatímco trojúhelníkový píst udělá v komoře 1 celou otáčku, výstupní excentrická hřídel se otočí 3krát.</li>
+            <li><strong>4. Těsnicí lišty (Apex Seals) – Vrcholové utěsnění tří komor:</strong> Na všech třech vrcholech trojúhelníkového pístu jsou umístěny pružné těsnicí lišty (tzv. <em>apex seals</em>), které neustále kloužou po vnitřní stěně statoru a oddělují od sebe jednotlivé pracovní prostory (sání, kompresi a výfuk).</li>
+        </ul>
+    </div>
+
+    <!-- SLIDE 4: ZÁKLADNÍ IDENTIFIKACE -->
+    <div class="slide" id="slide4">
+        <span class="cislo-slidu">Snímek 4 / 12</span>
+        <h2>3. Základní identifikace: Charakteristika Wankelova motoru</h2>
+        <p>
+            Přestože Wankelův motor nemá ventily a na první pohled připomíná dvoutaktní motor (kvůli kanálům ve stěně komory a přimazávání olejem), z hlediska termodynamiky jde o plnohodnotný <strong>čtyřdobý spalovací motor</strong>.
+        </p>
+
+        <table>
+            <tr>
+                <th>Vlastnost</th>
+                <th>Charakteristika a vysvětlení</th>
+            </tr>
+            <tr>
+                <td><strong>Typ motoru</strong></td>
+                <td>Čtyřdobý spalovací motor s krouživým pístem (německy <em>Kreiskolbenmotor – KKM</em>).</td>
+            </tr>
+            <tr>
+                <td><strong>Autoři koncepce</strong></td>
+                <td><strong>Felix Wankel</strong> (původní rotační prototyp DKM 54) a <strong>Hanns Dieter Paschke</strong> (praktická koncepce KKM 57).</td>
+            </tr>
+            <tr>
+                <td><strong>Hlavní výrobci</strong></td>
+                <td>NSU Motorenwerke (Německo), Mazda (Japonsko – největší výrobce), dále experimentálně Citroën (M35, GS Birotor) nebo motocykly Norton a Hercules.</td>
+            </tr>
+            <tr>
+                <td><strong>Pracovní cyklus</strong></td>
+                <td><strong>Sání, komprese, expanze a výfuk probíhají současně!</strong> Každá ze tří stran trojúhelníkového rotoru vykonává v daný okamžik jinou fázi čtyřdobého cyklu. Během jedné otáčky rotoru tak proběhnou hned tři zážehy.</td>
+            </tr>
+            <tr>
+                <td><strong>Současný stav</strong></td>
+                <td>Sériové využití jako kompaktní generátor elektrické energie (tzv. <em>range extender</em>), pohon bezpilotních dronů a výzkum spalování vodíku.</td>
+            </tr>
+        </table>
+
+        <div class="infobox">
+            <strong>Rozdíl mezi DKM 54 a KKM 57:</strong> U prvního Wankelova návrhu <em>DKM 54</em> se vysokou rychlostí otáčel nejen vnitřní píst, ale i celá vnější komora (zapalovací svíčky byly v pístu a špatně se k nim dostávalo). Inženýr Hanns Dieter Paschke v roce 1957 komoru zastavil a nechal uvnitř kroužit pouze píst po excentrické dráze – tak vznikl <em>KKM 57</em>, ze kterého vycházejí všechny dnešní rotační motory.
+        </div>
+    </div>
+
+    <!-- SLIDE 5: KONSTRUKČNÍ VLASTNOSTI (VÝHODY A ÚSKALÍ) -->
+    <div class="slide" id="slide5">
+        <span class="cislo-slidu">Snímek 5 / 12</span>
+        <h2>4. Konstrukční vlastnosti: Výhody a úskalí konstrukce</h2>
+        <p>
+            Koncepce rotačního motoru přináší oproti běžným pístovým motorům řadu fascinujících výhod, ale zároveň trpí specifickými fyzikálními a konstrukčními nevýhodami, které omezily jeho masové rozšíření.
+        </p>
+
+        <div class="vyhody">
+            <h3>&#10004; Hlavní přednosti</h3>
+            <ul>
+                <li><strong>Minimum dílů:</strong> Absenci ojnic, ventilů, pružin, vačkových hřídelí i rozvodového řetězu nahrazuje prostá rotace. Základ dvourotorového motoru tvoří v podstatě jen <strong>tři hlavní pohyblivé části</strong> (dva rotory a jedna excentrická hřídel).</li>
+                <li><strong>Nízká hmotnost:</strong> Mimořádný poměr výkonu k celkovým rozměrům. Motor je zhruba o třetinu až polovinu menší a lehčí než běžný pístový motor o stejném výkonu, což u sportovních aut umožňuje posunout motor za přední nápravu (ideální rozložení hmotnosti 50:50).</li>
+                <li><strong>Kultivovaný chod:</strong> Minimální vibrace bez vratného pohybu pístů. Protože žádné písty nemusejí v úvratích brzdit a měnit směr pohybu o 180°, nevznikají zde setrvačné síly prvního a druhého řádu a motor se snadno vytáčí k 9 000 ot./min.</li>
+            </ul>
+        </div>
+
+        <div class="nevyhody">
+            <h3>&#9888; Technická úskalí</h3>
+            <ul>
+                <li><strong>Opotřebení těsnění (Apex Seals):</strong> Extrémní namáhání vrcholových lišt třením, vysokou teplotou i odstředivou silou. Navíc oddělují horkou expanzní část od studené sací části, což způsobuje tepelné pnutí a nižší životnost oproti běžným pístním kroužkům.</li>
+                <li><strong>Tepelná ztráta:</strong> Protáhlý spalovací prostor zvyšuje spotřebu paliva. V okamžiku zážehu má spalovací prostor tvar úzké štěrbiny s velkým povrchem stěn vůči malému objemu, takže značná část tepla uniká do chladicí soustavy místo přeměny na mechanickou práci.</li>
+                <li><strong>Spalování oleje:</strong> Nutnost přímého mazání komory zhoršuje emise. Aby se třecí plochy a těsnicí lišty nezadřely, musí být do komory v malém množství vstřikován motorový olej, který shoří spolu s benzínem.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: MAZDA RX-8 -->
+    <div class="slide" id="slide6">
+        <span class="cislo-slidu">Snímek 6 / 12</span>
+        <h2>5. Vrchol atmosférické éry: Mazda RX-8 (Renesis)</h2>
+        <p>
+            Posledním masově vyráběným sportovním vozem, jehož kola přímo poháněl Wankelův motor, byla čtyřdveřová <strong>Mazda RX-8</strong> (vyráběná v letech 2003–2012). Její motor s označením <strong>Renesis (13B-MSP)</strong> přinesl zásadní konstrukční průlom.
+        </p>
+
+        <div class="infobox">
+            <strong>MĚRNÝ VÝKON MOTORU: 177 k/l (koní na litr objemu)!</strong><br>
+            Tento atmosférický (nepřeplňovaný) motor získal prestižní světové ocenění <em>International Engine of the Year 2003</em>.
+        </div>
+
+        <h3>Technické parametry (Renesis 13B-MSP):</h3>
+        <ul>
+            <li><strong>Koncepce:</strong> 2 komory, objem 2 &times; 654 cm³ (celkem <strong>1 308 cm³</strong>, tedy 1,3 litru).</li>
+            <li><strong>Maximální výkon:</strong> <strong>170 kW (231 k)</strong> při 8 200 ot./min (u silnější šestistupňové verze High Power).</li>
+            <li><strong>Maximální otáčky:</strong> <strong>9 000 ot./min</strong> (elektronický omezovač doprovázený pípnutím v kabině).</li>
+            <li><strong>Točivý moment:</strong> 211 N&middot;m při 5 500 ot./min.</li>
+            <li><strong>Konstrukční inovace:</strong> Boční sací a výfukové kanály v bloku (<em>MSP – Multi-Side Port</em>). U starších motorů byly výfukové kanály na obvodu komory, což způsobovalo překrývání sání a výfuku a únik nespálené směsi. Přesunutím kanálů do bočních stěn klesla spotřeba i emise.</li>
+        </ul>
+    </div>
+
+    <!-- SLIDE 7: HISTORICKÁ PRODUKCE -->
+    <div class="slide" id="slide7">
+        <span class="cislo-slidu">Snímek 7 / 12</span>
+        <h2>6. Historická produkce: Přehled klíčových modelů v letech</h2>
+        <p>
+            Celkově bylo na světě vyrobeno přes <strong>2 miliony vozidel</strong> s Wankelovým motorem, z čehož drtivou většinu vyrobila japonská automobilka Mazda. Níže je přehled nejvýznamnějších sériových modelů v jednotlivých dekádách:
+        </p>
+
+        <table>
+            <tr>
+                <th>Období</th>
+                <th>Model</th>
+                <th>Konfigurace motoru</th>
+                <th>Počet kusů</th>
+            </tr>
+            <tr>
+                <td>1964–1967</td>
+                <td><strong>NSU Spider</strong></td>
+                <td>1 rotor (498 cm³)</td>
+                <td>2 375 ks</td>
+            </tr>
+            <tr>
+                <td>1967–1972</td>
+                <td><strong>Mazda Cosmo Sport 110S</strong></td>
+                <td>2 rotory (982 cm³)</td>
+                <td>1 176 ks</td>
+            </tr>
+            <tr>
+                <td>1967–1977</td>
+                <td><strong>NSU Ro 80</strong></td>
+                <td>2 rotory (995 cm³)</td>
+                <td>37 398 ks</td>
+            </tr>
+            <tr>
+                <td>1978–2002</td>
+                <td><strong>Mazda RX-7 (3 generace)</strong></td>
+                <td>2 rotory (12A / 13B)</td>
+                <td>811 634 ks</td>
+            </tr>
+            <tr>
+                <td>2003–2012</td>
+                <td><strong>Mazda RX-8</strong></td>
+                <td>2 rotory (Renesis)</td>
+                <td>192 094 ks</td>
+            </tr>
+        </table>
+
+        <div class="infobox">
+            <strong>Proč se v tabulce uvádí objem jen kolem 1,0 až 1,3 litru?</strong> U Wankelova motoru se udává tzv. komorový objem (rozdíl mezi maximálním a minimálním objemem jedné pracovní komory). Protože však během jedné otáčky excentrické hřídele proběhne pracovní cyklus u dvourotorového motoru dvakrát častěji než u běžného čtyřválce, z hlediska daní a závodních předpisů se objem Wankelu často přepočítával koeficientem 1,5 až 2 (1,3l Wankel tak odpovídal zhruba 2,0l až 2,6l klasickému motoru).
+        </div>
+    </div>
+
+    <!-- SLIDE 8: STATISTIKA VÝROBY (GRAF) -->
+    <div class="slide" id="slide8">
+        <span class="cislo-slidu">Snímek 8 / 12</span>
+        <h2>7. Statistika výroby: Graf vyrobených vozů dle modelových řad</h2>
+        <p>
+            Následující graf porovnává celkové počty vyrobených vozů u čtyř komerčně nejúspěšnějších modelových řad v historii Wankelova motoru:
+        </p>
+
+        <div class="graf-radek">
+            <div class="graf-popis">
+                <span><strong>Mazda RX-7 (FB / FC / FD)</strong></span>
+                <span class="graf-cislo">811 634 ks</span>
+            </div>
+            <div class="graf-pozadi">
+                <div class="graf-pruh" style="width: 100%;">100 % (nejúspěšnější rotační vůz historie)</div>
+            </div>
+        </div>
+
+        <div class="graf-radek">
+            <div class="graf-popis">
+                <span><strong>Mazda RX-3 / Savanna</strong></span>
+                <span class="graf-cislo" style="color: #222222;">286 757 ks</span>
+            </div>
+            <div class="graf-pozadi">
+                <div class="graf-pruh" style="width: 35.3%; background-color: #222222;">35,3 %</div>
+            </div>
+        </div>
+
+        <div class="graf-radek">
+            <div class="graf-popis">
+                <span><strong>Mazda RX-8 (SE3P)</strong></span>
+                <span class="graf-cislo" style="color: #222222;">192 094 ks</span>
+            </div>
+            <div class="graf-pozadi">
+                <div class="graf-pruh" style="width: 23.7%; background-color: #222222;">23,7 %</div>
+            </div>
+        </div>
+
+        <div class="graf-radek">
+            <div class="graf-popis">
+                <span><strong>NSU Ro 80 (Automobil roku 1968)</strong></span>
+                <span class="graf-cislo" style="color: #555555;">37 398 ks</span>
+            </div>
+            <div class="graf-pozadi">
+                <div class="graf-pruh" style="width: 4.6%; background-color: #666666;"></div>
+            </div>
+        </div>
+
+        <h3>Komentář k jednotlivým řadám v grafu:</h3>
+        <ul>
+            <li><strong>Mazda RX-7 (FB, FC, FD):</strong> Vyráběla se přes 24 let ve třech generacích (první s atmosférickým motorem 12A, druhá s přeplňovaným 13B Turbo a třetí generace FD se sekvenčním biturbem).</li>
+            <li><strong>Mazda RX-3 / Savanna (1971–1978):</strong> Kompaktní rodinný sedan, kombi a kupé ze 70. let, který Masově rozšířil rotační motory mezi běžné řidiče i na japonské závodní okruhy.</li>
+            <li><strong>Mazda RX-8 (SE3P):</strong> Čtyřdveřové kupé s protisměrně otevíranými zadními dveřmi (<em>freestyle doors</em>) a atmosférickým motorem Renesis.</li>
+            <li><strong>NSU Ro 80:</strong> Nejúspěšnější evropský sériový vůz s Wankelovým motorem, který položil základy moderní aerodynamiky osobních vozů.</li>
+        </ul>
+    </div>
+
+    <!-- SLIDE 9: LE MANS 1991 -->
+    <div class="slide" id="slide9">
+        <span class="cislo-slidu">Snímek 9 / 12</span>
+        <h2>8. Historický milník: 24 hodin Le Mans (1991)</h2>
+        <p>
+            Nejslavnějším okamžikem v historii Wankelova motoru na závodních tratích se stal červen roku 1991. Ve vytrvalostním závodě <strong>24 hodin Le Mans</strong> zvítězil japonský prototyp <strong>Mazda 787B</strong> se startovním číslem 55 (piloti Volker Weidler, Johnny Herbert a Bertrand Gachot).
+        </p>
+
+        <div class="infobox">
+            <strong>Závodní speciál Mazda 787B (#55 Renown):</strong> Vůz během 24 hodin ujel celkem 362 okruhů (4 932 km) průměrnou rychlostí 205,3 km/h a porazil tovární týmy Mercedes-Benz, Jaguar i Peugeot.
+        </div>
+
+        <h3>Technické zajímavosti speciálu Mazda 787B:</h3>
+        <ul>
+            <li><strong>Motor R26B:</strong> Čtyřrotorový atmosférický agregát o objemu <strong>2 616 cm³</strong> (4 &times; 654 cm³) se třemi zapalovacími svíčkami na každou komoru a plynule proměnnou délkou sacího potrubí.</li>
+            <li><strong>Výkon:</strong> <strong>515 kW (700 k) při 9 000 ot./min</strong> (v testech dokázal vyvinout přes 900 koní při 10 500 ot./min, ale kvůli spolehlivosti na 24 hodin byl výkon omezen).</li>
+            <li><strong>Hmotnost vozu:</strong> Pouhých <strong>830 kg</strong> díky ultralehkému karbonovému monokoku (uhlíková vlákna a kevlar).</li>
+            <li><strong>Prvenství:</strong> Jediný vítěz Le Mans v historii bez klasických pístů. Po závodě inženýři motor rozebrali a zjistili, že opotřebení dílů je minimální a agregát by zvládl odjet ještě jeden celý 24hodinový závod.</li>
+        </ul>
+    </div>
+
+    <!-- SLIDE 10: RENESANCE V ÉŘE ELEKTROMOBILITY -->
+    <div class="slide" id="slide10">
+        <span class="cislo-slidu">Snímek 10 / 12</span>
+        <h2>9. Renesance v éře elektromobility (od roku 2023)</h2>
+        <p>
+            V roce 2023 uvedla Mazda na trh model <strong>Mazda MX-30 e-Skyactiv R-EV</strong>, kterým Wankelův motor vrátila do sériové výroby. Tentokrát však dostal zcela novou úlohu, která dokonale využívá jeho přednosti a maže jeho dřívější slabiny.
+        </p>
+
+        <div class="infobox">
+            <strong>Koncepce e-Skyactiv R-EV:</strong> Elektromotor (125 kW) + baterie (17,8 kWh) + jednorotorový Wankelův generátor 8C (830 cm³, 55 kW) uložený v jednom kompaktním bloku pod přední kapotou.
+        </div>
+
+        <ul>
+            <li><strong>Sériový plug-in hybrid:</strong> Kola pohání výhradně elektromotor (<strong>125 kW / 170 k</strong>). Wankelův motor není s koly vůbec mechanicky spojen.</li>
+            <li><strong>Generátor 8C:</strong> Jednorotorový Wankel (<strong>830 cm³, 55 kW / 75 k</strong>) dobíjí baterii při poklesu její kapacity.</li>
+            <li><strong>Technické inovace:</strong> Přímé vstřikování paliva do komory (zvyšuje účinnost a snižuje spotřebu), recirkulace výfukových plynů (EGR) a hliníkové bočnice s odolným keramickým nástřikem, které ušetřily přes 15 kg hmotnosti.</li>
+            <li><strong>Optimální režim:</strong> Práce v konstantních otáčkách eliminuje emise a výrazně snižuje spotřebu, protože motor nemusí neustále měnit otáčky podle sešlápnutí plynového pedálu.</li>
+            <li><strong>Kombinovaný dojezd:</strong> Přes <strong>600 km</strong> bez obav z vybití baterie (cca 85 km čistě na elektřinu + energie z 50litrové nádrže).</li>
+        </ul>
+    </div>
+
+    <!-- SLIDE 11: SOUČASNÁ ODVĚTVÍ A BUDOUCNOST -->
+    <div class="slide" id="slide11">
+        <span class="cislo-slidu">Snímek 11 / 12</span>
+        <h2>10. Současná odvětví a budoucnost: Wankelův motor v provozu dnes</h2>
+        <p>
+            Kde všude se dnes Wankelův motor uplatňuje a proč o něj inženýři mají v 21. století znovu velký zájem?
+        </p>
+
+        <h3>1. Prodlužovače dojezdu (Range Extenders)</h3>
+        <p>
+            Kompaktní generátory pro sériové elektromobily. Díky svým miniaturním rozměrům se jednorotorový Wankel snadno vejde pod kapotu vedle elektromotoru a výkonové elektroniky. Posádka navíc při jeho zapnutí téměř necítí žádné vibrace, což zachovává tichý komfort elektromobilu.
+        </p>
+
+        <h3>2. Bezpilotní letectví (Drony a UAV)</h3>
+        <p>
+            Pohon průzkumných i vojenských dronů bez vibrací. Ve vzduchu je klíčová nízká hmotnost (vysoký poměr výkonu ku váze) a <strong>nulové vibrace</strong>, aby se nechvěly citlivé kamery a optické senzory na palubě. Právě zde dnes Wankelovy motory dominují.
+        </p>
+
+        <h3>3. Vodíkové spalování</h3>
+        <p>
+            Ideální oddělení komor proti zpětnému zážehu. Vodík se velmi snadno vznítí – v klasickém pístovém motoru zůstávají výfukové ventily a spalovací prostor horké, takže při nasátí vodíku často dochází k nechtěnému samozážehu (zpětnému šlehnutí do sání). U Wankelova motoru je však <strong>sací komora fyzicky oddělená od horké spalovací komory</strong> – vodíková směs se nasává v chladné části motoru a k nebezpečnému zpětnému zážehu nedochází.
+        </p>
+    </div>
+
+    <!-- SLIDE 12: ZÁVĚR A ZDROJE -->
+    <div class="slide" id="slide12">
+        <span class="cislo-slidu">Snímek 12 / 12</span>
+        <h2>Děkuji za pozornost</h2>
+        <p class="podnadpis">Prostor pro vaše dotazy a diskuzi</p>
+        <p style="text-align: center; font-size: 18px;">
+            <strong>Autor prezentace: Filip Krejča</strong>
+        </p>
+
+        <div class="zdroje-box">
+            <h3>Zdroje informací</h3>
+            <ul>
+                <li>Wikipedie – Wankelův motor: <a href="https://cs.wikipedia.org/wiki/Wankelův_motor" target="_blank">https://cs.wikipedia.org/wiki/Wankelův_motor</a></li>
+                <li>TipCars Magazín – Wankelův motor a Mazda: <a href="https://www.tipcars.com/magazin/nase-tema/wankeluv-motor-mazda-rotacni-motor-272024.html" target="_blank">https://www.tipcars.com/magazin/nase-tema/wankeluv-motor-mazda-rotacni-motor-272024.html</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Skript pro přepínání režimu (Vše pod sebou / Po jednom snímku) -->
+    <script>
+        var rezimPoJednom = false;
+        var aktualniSlide = 0;
+        var slidy = document.getElementsByClassName("slide");
+        var sipkyBox = document.getElementById("sipky");
+        var pocitadlo = document.getElementById("pocitadlo");
+        var tlacitkoRezim = document.getElementById("tlacitkoRezim");
+
+        function aktualizujZobrazeni() {
+            for (var i = 0; i < slidy.length; i++) {
+                if (rezimPoJednom) {
+                    slidy[i].style.display = (i === aktualniSlide) ? "block" : "none";
+                } else {
+                    slidy[i].style.display = "block";
+                }
+            }
+
+            if (rezimPoJednom) {
+                sipkyBox.style.display = "inline";
+                pocitadlo.innerHTML = (aktualniSlide + 1) + " / " + slidy.length;
+                tlacitkoRezim.innerHTML = "Režim: Vše pod sebou";
+            } else {
+                sipkyBox.style.display = "none";
+                tlacitkoRezim.innerHTML = "Režim: Po jednom snímku";
+            }
+        }
+
+        function zmenRezim() {
+            rezimPoJednom = !rezimPoJednom;
+            aktualizujZobrazeni();
+        }
+
+        function posunSlide(smer) {
+            aktualniSlide = aktualniSlide + smer;
+            if (aktualniSlide < 0) {
+                aktualniSlide = 0;
+            }
+            if (aktualniSlide >= slidy.length) {
+                aktualniSlide = slidy.length - 1;
+            }
+            aktualizujZobrazeni();
+        }
+
+        function ukazKonkretni(index) {
+            aktualniSlide = index;
+            if (rezimPoJednom) {
+                aktualizujZobrazeni();
+            }
+        }
+
+        // Ovládání šipkami na klávesnici v režimu po jednom snímku
+        document.addEventListener("keydown", function(e) {
+            if (rezimPoJednom) {
+                if (e.key === "ArrowRight") {
+                    posunSlide(1);
+                } else if (e.key === "ArrowLeft") {
+                    posunSlide(-1);
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
+
